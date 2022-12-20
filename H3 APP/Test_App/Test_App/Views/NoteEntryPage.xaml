@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:H3_App.ViewModels"
+             x:Class="H3_App.Views.NoteEntryPage"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <ViewModels:NoteEntryViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <!-- Implicit styles -->
+        <Style TargetType="{x:Type Editor}">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource AppBackgroundColor}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding Save}" Text="Save" />
+        <ToolbarItem Command="{Binding Cancel}" Text="Delete" />
+    </ContentPage.ToolbarItems>
+
+
+    <!-- Layout children vertically -->
+    <StackLayout Margin="{StaticResource PageMargin}" BindingContext="{Binding CurrentNote}">
+        <Editor Placeholder="Agenda.."
+                Text="{Binding Text}"
+                HeightRequest="100" />
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Oprettet : "></Label>
+            <Label Text="{Binding Date}" TextColor="{StaticResource TertiaryColor}" FontSize="Small" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
